@@ -8,4 +8,7 @@ const userSchema = new mongoose.Schema({
     expenses: [{ type: mongoose.Schema.Types.ObjectId, ref: 'transactionSchema' }],
     email: { type: String, required: true },
     password: { type: String, required: true },
+    phoneNumber: {type: String, required: true}
 })
+
+module.exports = mongoose.model('User', userSchema);
