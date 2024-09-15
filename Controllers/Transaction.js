@@ -34,4 +34,25 @@ app.post(
         }
     }
 );
+
+app.get(
+    '/getUserBytransaction/:id',
+    async(req,res)=>{
+        try{
+        const { id } = req.params;
+        const transactionDocument = await Transaction.findById(id);
+        const userId = transactionDocument.ownerId;
+        const user = await User.findById(userId);
+
+
+
+        res.status(200).json(user);
+        }
+        catch (error) {
+            console.error("Error fetchang documents", error);
+            res.status(500).json({message: 'Internal Server Error' });
+        }
+
+    }
+)
 module.exports = app;
