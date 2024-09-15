@@ -35,25 +35,24 @@ app.post(
     }
 );
 
-
 app.get(
-    '/myTransactions/:id/',
+    '/getUserBytransaction/:id',
     async(req,res)=>{
-        try {
-            const { id } = req.params;
-            const documents = await Transaction.find({ ownerId: id });
+        try{
+        const { id } = req.params;
+        const transactionDocument = await Transaction.findById(id);
+        const userId = transactionDocument.ownerId;
+        const user = await User.findById(userId);
 
-            if (!documents.length) {
-                return res.status(404).json({ message: 'No documents found' });
-            }
 
-            res.status(200).json(documents);
-        } catch (error) {
-            console.error('Error fetching documents:', error);
-            res.status(500).json({ message: 'Internal Server Error' });
+
+        res.status(200).json(user);
         }
-        
+        catch (error) {
+            console.error("Error fetchang documents", error);
+            res.status(500).json({message: 'Internal Server Error' });
+        }
 
     }
-);
+)
 module.exports = app;

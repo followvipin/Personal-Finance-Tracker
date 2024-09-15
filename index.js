@@ -6,6 +6,7 @@ require('dotenv').config();
 const userRoutes = require('./Controllers/User');
 const transactionRoutes = require('./Controllers/Transaction');
 
+
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -20,6 +21,7 @@ mongoose.connect(process.env.MONGODB_URI)
 // Use routes
 app.use('/', userRoutes);
 app.use('/', transactionRoutes);
+
 // app.get('/', (req, res) => {
 //   res.send('Hello World!');
 // });
