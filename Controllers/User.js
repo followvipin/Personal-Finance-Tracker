@@ -20,7 +20,6 @@ app.post("/user/", async (req, res) => {
   }
 });
 
-
 app.get(
   '/myInfo/:id/',
   async(req,res)=>{
