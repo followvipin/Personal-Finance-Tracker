@@ -24,21 +24,19 @@ app.get(
   '/myInfo/:id/',
   async(req,res)=>{
       try {
-          const { id } = req.params;
-          const documents = await User.find({ "_id": id });
+        const id = req.params.id;
+        const user = await User.findById(id);
 
-          if (!documents.length) {
-              return res.status(404).json({ message: 'No documents found' });
-          }
-
-          res.status(200).json(documents);
+        if (!user) {
+          return res.status(404).json({ message: 'User not found' });
+        }
+    
+        // Return the found user
+        res.status(200).json(user);
       } catch (error) {
-          console.error('Error fetching documents:', error);
-          res.status(500).json({ message: 'Internal Server Error' });
+        console.error('Error fetching user by ID:', error);
+        res.status(500).json({ message: 'Server error' });
       }
-      
-
-  }
-);
+});
 
 module.exports = app;
