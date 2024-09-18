@@ -36,6 +36,27 @@ app.post(
 );
 
 app.get(
+    '/myTransactions/:id/',
+    async(req,res)=>{
+        try {
+            const { id } = req.params;
+            const documents = await Transaction.find({ ownerId: id });
+
+            if (!documents.length) {
+                return res.status(404).json({ message: 'No documents found' });
+            }
+
+            res.status(200).json(documents);
+        } catch (error) {
+            console.error('Error fetching documents:', error);
+            res.status(500).json({ message: 'Internal Server Error' });
+        }
+        
+
+    }
+);
+
+app.get(
     '/getUserBytransaction/:id',
     async(req,res)=>{
         try{
