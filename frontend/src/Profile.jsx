@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './UserProfile.css'; // Import the CSS for styling
+import './Profile.css'; // Import the CSS for styling
 
 // Mock API request (replace this with your actual API endpoint)
 const API_URL = 'https://localhost:5000/myInfo/66e46fe6072d5f86d8cab1a7/';

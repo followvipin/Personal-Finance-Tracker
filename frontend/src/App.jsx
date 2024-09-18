@@ -1,17 +1,16 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
-import Header from './Header';
+// import Header from './Header';
 import LoggedHeader from './LoggedHeader';
+import Profile from './Profile';
 
-function App() {
+export default function App() {
   return (
     <div className="App">
       <header>
       <LoggedHeader />
       </header>
-      
+      <Profile/>
     </div>
   );
-}
-
-export default App;
+};
