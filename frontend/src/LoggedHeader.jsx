@@ -9,6 +9,7 @@ const Header = () => {
   };
 
   return (
+    <>
     <header className="header">
       <div className="logo">Financlo</div>
       <nav className={`nav ${isMenuOpen ? "nav--open" : ""}`}>
@@ -30,6 +31,7 @@ const Header = () => {
         <span className="menu-toggle__bar"></span>
       </div>
     </header>
+    </>
   );
 };
 
