@@ -20,4 +20,26 @@ app.post("/user/", async (req, res) => {
   }
 });
 
+
+app.get(
+  '/myInfo/:id/',
+  async(req,res)=>{
+      try {
+          const { id } = req.params;
+          const documents = await User.find({ "_id": id });
+
+          if (!documents.length) {
+              return res.status(404).json({ message: 'No documents found' });
+          }
+
+          res.status(200).json(documents);
+      } catch (error) {
+          console.error('Error fetching documents:', error);
+          res.status(500).json({ message: 'Internal Server Error' });
+      }
+      
+
+  }
+);
+
 module.exports = app;
