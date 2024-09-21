@@ -21,7 +21,7 @@ app.post('/login', async (req, res) => {
         const JWT_SECRET = '66e5c7b247d3271faa089cad';
 
         const token = jwt.sign(
-            { id: user._id, username: user.username }, 
+            { id: user._id, username: user_name }, 
             JWT_SECRET, 
             { expiresIn: '1h' } 
         );
