@@ -5,6 +5,7 @@ require('dotenv').config();
 
 const userRoutes = require('./Controllers/User');
 const transactionRoutes = require('./Controllers/Transaction');
+const loginRoutes = require('./Controllers/Login');
 
 
 const app = express();
@@ -21,6 +22,7 @@ mongoose.connect(process.env.MONGODB_URI)
 // Use routes
 app.use('/', userRoutes);
 app.use('/', transactionRoutes);
+app.use('/', loginRoutes)
 
 // app.get('/', (req, res) => {
 //   res.send('Hello World!');
