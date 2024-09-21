@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express.Router();
 const User = require('../Models/User');
+const JwtBearerMiddleware = require('../Auth/JwtBearer');
+
 
 app.post("/user/", async (req, res) => {
   const user = new User({
@@ -37,6 +39,13 @@ app.get(
         console.error('Error fetching user by ID:', error);
         res.status(500).json({ message: 'Server error' });
       }
+});
+
+const secretKey = '66e5c7b247d3271faa089cad'; // Your secret key
+const jwtMiddleware = new JwtBearerMiddleware(secretKey);
+
+app.get('/protected/', jwtMiddleware.authenticate, async(req,res) => {
+  res.json();
 });
 
 module.exports = app;
