@@ -41,6 +41,13 @@ app.get(
       }
 });
 
+
+// const secretKey = '66e5c7b247d3271faa089cad'; // Your secret key
+// const jwtMiddleware = new JwtBearerMiddleware(secretKey);
+
+// app.get('/protected/', jwtMiddleware.authenticate, async(req,res) => {
+//   res.json();
+// });
 const secretKey = '66e5c7b247d3271faa089cad'; // Your secret key
 const jwtMiddleware = new JwtBearerMiddleware(secretKey);
 
