@@ -25,8 +25,11 @@ class JwtBearerMiddleware {
             }
 
             // Attach the decoded payload to the request for further use
-            const user = decoded;
-            return res.json({ message: user }); // Proceed to the next middleware or route handler
+            req.user = decoded;
+            
+
+      // Proceed to the next middleware or route handler
+      next();// Proceed to the next middleware or route handler
         });
     }
 }
