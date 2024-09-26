@@ -1,8 +1,10 @@
 body {
+    /* position: fixed; */
     font-family: 'Arial', sans-serif;
     background-color: #f4f4f9;
     margin: 0;
     padding: 0;
+    /* top: 0; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -44,7 +46,7 @@ input {
     box-sizing: border-box;
 }
 
-button {
+#submit {
     padding: 12px;
     background-color: #4CAF50;
     color: white;
@@ -54,7 +56,7 @@ button {
     font-size: 16px;
 }
 
-button:hover {
+#submit:hover {
     background-color: #45a049;
 }
 
