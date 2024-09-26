@@ -2,6 +2,7 @@
 import './App.css';
 // import Header from './Header';
 import LoggedHeader from './LoggedHeader';
+import UserCreationForm from './UserCreationForm';
 import Profile from './Profile';
 
 export default function App() {
@@ -11,6 +12,8 @@ export default function App() {
       <LoggedHeader />
       </header>
       <Profile/>
+
+      <UserCreationForm /> 
     </div>
   );
 };
