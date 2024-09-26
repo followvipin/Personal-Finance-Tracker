@@ -21,6 +21,7 @@ const Header = () => {
       <nav className={`nav ${isMenuOpen ? "nav--open" : ""}`}>
         <ul className="nav__list">
           <li className="nav__item">
+
           <button type="button" className="nav__link" onClick={handleRegisterClick}>Register</button>
           </li>
           <li className="nav__item">
