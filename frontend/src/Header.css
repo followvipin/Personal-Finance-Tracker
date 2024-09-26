@@ -5,6 +5,23 @@
   position: relative;
 }
 
+button{
+  background-color: #bb8fce;
+  border: none;
+  /* display: flex; */
+  /* justify-content: space-between; */
+  /* align-items: center; */
+  padding: 20px;
+  /* background-color: #bb8fce; */
+  color: #fff;
+  /* position: fixed; Fixed position */
+  /* top: 0; Stick to the top */
+  /* left: 0; */
+  width: 100%;
+  z-index: 1000; /* Ensure it's on top of other elements */
+  /* transition: background-color 0.3s ease; */
+  
+}
 .header {
   display: flex;
   justify-content: space-between;

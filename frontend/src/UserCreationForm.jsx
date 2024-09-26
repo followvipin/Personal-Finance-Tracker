@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import './UserCreationForm.css'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // Import Font Awesome component
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons"; 
 
-const UserCreationForm = () => {
+const UserCreationForm = ({ onBack }) => {
     const [formData, setFormData] = useState({
         full_name: '',
         user_name: '',
@@ -11,6 +13,8 @@ const UserCreationForm = () => {
         password: '',
         phoneNumber: ''
     });
+
+    const [showPassword, setShowPassword] = useState(false);
     const [responseMessage, setResponseMessage] = useState('');
 
 
@@ -20,6 +24,10 @@ const UserCreationForm = () => {
             [e.target.name]: e.target.value
         });
     };
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword); // Toggle password visibility
+      };
 
    
     const handleSubmit = async (e) => {
@@ -46,7 +54,7 @@ const UserCreationForm = () => {
 
     return (
         <div>
-            <h2>Create User</h2>
+            {/* <h2>Create User</h2> */}
             <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="full_name">Full Name:</label>
@@ -106,12 +114,16 @@ const UserCreationForm = () => {
                 <div>
                     <label htmlFor="password">Password:</label>
                     <input
-                        type="password"
+                        type={showPassword ? "text" : "password"}
                         id="password"
                         name="password"
                         value={formData.password}
                         onChange={handleChange}
                         required
+                    />
+                    <FontAwesomeIcon
+                    icon={showPassword ? faEyeSlash : faEye}
+                    onClick={togglePasswordVisibility}
                     />
                 </div>
                 <div>
@@ -125,7 +137,7 @@ const UserCreationForm = () => {
                         required
                     />
                 </div>
-                <button type="submit">Create User</button>
+                <button id="submit" type="submit">Register</button>
             </form>
 
             {/* Display response message */}
