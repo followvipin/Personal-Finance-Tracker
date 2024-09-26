@@ -5,8 +5,8 @@ const UserCreationForm = () => {
     const [formData, setFormData] = useState({
         full_name: '',
         user_name: '',
-        account_balance: '',
-        cash_amount: '',
+        // account_balance: '',
+        // cash_amount: '',
         email: '',
         password: '',
         phoneNumber: ''
@@ -70,7 +70,7 @@ const UserCreationForm = () => {
                         required
                     />
                 </div>
-                <div>
+                {/* <div>
                     <label htmlFor="account_balance">Account Balance:</label>
                     <input
                         type="number"
@@ -91,7 +91,7 @@ const UserCreationForm = () => {
                         onChange={handleChange}
                         required
                     />
-                </div>
+                </div> */}
                 <div>
                     <label htmlFor="email">Email:</label>
                     <input
