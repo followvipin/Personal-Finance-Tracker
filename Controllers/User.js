@@ -8,8 +8,8 @@ app.post("/user/", async (req, res) => {
   const user = new User({
     full_name: req.body.full_name,
     user_name: req.body.user_name,
-    account_balance: req.body.account_balance,
-    cash_amount: req.body.cash_amount,
+    // account_balance: req.body.account_balance,
+    // cash_amount: req.body.cash_amount,
     email: req.body.email,
     password: req.body.password,
     phoneNumber: req.body.phoneNumber,
