@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import './UserCreationForm.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // Import Font Awesome component
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons"; 
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css'; // Import default styles for react-phone-input-2
+
 
 const UserCreationForm = ({ onBack }) => {
     const [formData, setFormData] = useState({
@@ -25,6 +28,14 @@ const UserCreationForm = ({ onBack }) => {
         });
     };
 
+    const handlePhoneChanges = (value) => {
+        setFormData({
+            ...formData,
+            phoneNumber: value,
+            });
+          };
+
+
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword); // Toggle password visibility
       };
@@ -40,7 +51,8 @@ const UserCreationForm = ({ onBack }) => {
                 },
                 body: JSON.stringify(formData)
             });
-
+   
+        
             const data = await response.json();
             if (response.ok) {
                 setResponseMessage(`User created successfully: ${data.full_name}`);
@@ -53,7 +65,7 @@ const UserCreationForm = ({ onBack }) => {
     };
 
     return (
-        <div>
+        <div id="form1">
             {/* <h2>Create User</h2> */}
             <form onSubmit={handleSubmit}>
                 <div>
@@ -124,17 +136,31 @@ const UserCreationForm = ({ onBack }) => {
                     <FontAwesomeIcon
                     icon={showPassword ? faEyeSlash : faEye}
                     onClick={togglePasswordVisibility}
+                    style={{
+                        position: "absolute",
+                        right: "10px",
+                        top: "50%",
+                        transform: "translateY(-50%)",
+                        cursor: "pointer",
+                      }}
                     />
                 </div>
                 <div>
                     <label htmlFor="phoneNumber">Phone Number:</label>
-                    <input
+                  {/*  <input
                         type="tel"
                         id="phoneNumber"
                         name="phoneNumber"
                         value={formData.phoneNumber}
                         onChange={handleChange}
                         required
+                    />*/}
+                    <PhoneInput
+                    id="phoneNumber"
+                        country={'us'}
+                        value={formData.phoneNumber}
+                        onChange={handlePhoneChanges}
+                        inputStyle={{ width: '100%', padding: '10px', marginBottom: '10px' }}
                     />
                 </div>
                 <button id="submit" type="submit">Register</button>

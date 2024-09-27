@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Header.css"; // CSS file for styling the header
 
-const Header = ({ onRegisterClick }) => { // Receive onRegisterClick prop
+const Header = ({ onRegisterClick, onLoginClick }) => { // Correctly destructure the props
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -9,41 +9,43 @@ const Header = ({ onRegisterClick }) => { // Receive onRegisterClick prop
   };
 
   return (
-    <>
-      <header className="header">
-        <div className="logo">Financlo</div>
-        <nav className={`nav ${isMenuOpen ? "nav--open" : ""}`}>
-          <ul className="nav__list">
-            <li className="nav__item">
-              {/* Use an anchor tag for Register that triggers the function */}
-              <a href="#register" className="nav__link" onClick={(e) => {
-                e.preventDefault(); // Prevent default anchor behavior
-                onRegisterClick(); // Call function to show registration page
-              }}>
-                Register
-              </a>
-            </li>
-            <li className="nav__item">
-              <a href="#login" className="nav__link">Login</a>
-            </li>
-            <li className="nav__item">
-              <a href="#donate" className="nav__link">Donate</a>
-            </li>
-            <li className="nav__item">
-              <a href="#careers" className="nav__link">Careers</a>
-            </li>
-            <li className="nav__item">
-              <a href="#about" className="nav__link">About</a>
-            </li>
-          </ul>
-        </nav>
-        <div className="menu-toggle" onClick={toggleMenu}>
-          <span className="menu-toggle__bar"></span>
-          <span className="menu-toggle__bar"></span>
-          <span className="menu-toggle__bar"></span>
-        </div>
-      </header>
-    </>
+    <header className="header">
+      <div className="logo">Financlo</div>
+      <nav className={`nav ${isMenuOpen ? "nav--open" : ""}`}>
+        <ul className="nav__list">
+          <li className="nav__item">
+            {/* Register link that triggers the onRegisterClick function */}
+            <a href="#register" className="nav__link" onClick={(e) => {
+              e.preventDefault(); // Prevent default anchor behavior
+              onRegisterClick(); // Call function to show registration page
+            }}>
+              Register
+            </a>
+          </li>
+          <li className="nav__item">
+            {/* Login link that triggers the onLoginClick function */}
+            <a href="#login" className="nav__link" onClick={(e) => {
+              e.preventDefault(); // Prevent default anchor behavior
+              onLoginClick(); // Call function to show login page
+            }}>Login</a>
+          </li>
+          <li className="nav__item">
+            <a href="#donate" className="nav__link">Donate</a>
+          </li>
+          <li className="nav__item">
+            <a href="#careers" className="nav__link">Careers</a>
+          </li>
+          <li className="nav__item">
+            <a href="#about" className="nav__link">About</a>
+          </li>
+        </ul>
+      </nav>
+      <div className="menu-toggle" onClick={toggleMenu}>
+        <span className="menu-toggle__bar"></span>
+        <span className="menu-toggle__bar"></span>
+        <span className="menu-toggle__bar"></span>
+      </div>
+    </header>
   );
 };
 
