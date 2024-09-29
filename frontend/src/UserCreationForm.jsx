@@ -1,17 +1,14 @@
 import React, { useState } from 'react';
 import './UserCreationForm.css'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // Import Font Awesome component
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons"; 
 import PhoneInput from 'react-phone-input-2';
-import 'react-phone-input-2/lib/style.css'; // Import default styles for react-phone-input-2
-
+import 'react-phone-input-2/lib/style.css';
 
 const UserCreationForm = ({ onBack }) => {
     const [formData, setFormData] = useState({
         full_name: '',
         user_name: '',
-        // account_balance: '',
-        // cash_amount: '',
         email: '',
         password: '',
         phoneNumber: ''
@@ -19,7 +16,6 @@ const UserCreationForm = ({ onBack }) => {
 
     const [showPassword, setShowPassword] = useState(false);
     const [responseMessage, setResponseMessage] = useState('');
-
 
     const handleChange = (e) => {
         setFormData({
@@ -32,15 +28,13 @@ const UserCreationForm = ({ onBack }) => {
         setFormData({
             ...formData,
             phoneNumber: value,
-            });
-          };
-
+        });
+    };
 
     const togglePasswordVisibility = () => {
-        setShowPassword(!showPassword); // Toggle password visibility
-      };
+        setShowPassword(!showPassword); 
+    };
 
-   
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -52,7 +46,6 @@ const UserCreationForm = ({ onBack }) => {
                 body: JSON.stringify(formData)
             });
    
-        
             const data = await response.json();
             if (response.ok) {
                 setResponseMessage(`User created successfully: ${data.full_name}`);
@@ -66,7 +59,6 @@ const UserCreationForm = ({ onBack }) => {
 
     return (
         <div id="form1">
-            {/* <h2>Create User</h2> */}
             <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="full_name">Full Name:</label>
@@ -90,28 +82,6 @@ const UserCreationForm = ({ onBack }) => {
                         required
                     />
                 </div>
-                {/* <div>
-                    <label htmlFor="account_balance">Account Balance:</label>
-                    <input
-                        type="number"
-                        id="account_balance"
-                        name="account_balance"
-                        value={formData.account_balance}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <label htmlFor="cash_amount">Cash Amount:</label>
-                    <input
-                        type="number"
-                        id="cash_amount"
-                        name="cash_amount"
-                        value={formData.cash_amount}
-                        onChange={handleChange}
-                        required
-                    />
-                </div> */}
                 <div>
                     <label htmlFor="email">Email:</label>
                     <input
@@ -123,7 +93,9 @@ const UserCreationForm = ({ onBack }) => {
                         required
                     />
                 </div>
-                <div>
+                
+                {/* Password input and toggle icon inside a container */}
+                <div className="password-container">
                     <label htmlFor="password">Password:</label>
                     <input
                         type={showPassword ? "text" : "password"}
@@ -134,29 +106,16 @@ const UserCreationForm = ({ onBack }) => {
                         required
                     />
                     <FontAwesomeIcon
-                    icon={showPassword ? faEyeSlash : faEye}
-                    onClick={togglePasswordVisibility}
-                    style={{
-                        position: "absolute",
-                        right: "10px",
-                        top: "50%",
-                        transform: "translateY(-50%)",
-                        cursor: "pointer",
-                      }}
+                        icon={showPassword ? faEyeSlash : faEye}
+                        onClick={togglePasswordVisibility}
+                        className="eye-icon"
                     />
                 </div>
+
                 <div>
                     <label htmlFor="phoneNumber">Phone Number:</label>
-                  {/*  <input
-                        type="tel"
-                        id="phoneNumber"
-                        name="phoneNumber"
-                        value={formData.phoneNumber}
-                        onChange={handleChange}
-                        required
-                    />*/}
                     <PhoneInput
-                    id="phoneNumber"
+                        id="phoneNumber"
                         country={'us'}
                         value={formData.phoneNumber}
                         onChange={handlePhoneChanges}
@@ -166,7 +125,6 @@ const UserCreationForm = ({ onBack }) => {
                 <button id="submit" type="submit">Register</button>
             </form>
 
-            {/* Display response message */}
             {responseMessage && <p>{responseMessage}</p>}
         </div>
     );
