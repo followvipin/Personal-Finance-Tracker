@@ -1,18 +1,21 @@
 import React, { useState } from 'react';
 import './UserCreationForm.css'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons"; 
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
 
-const UserCreationForm = () => {
+const UserCreationForm = ({ onBack }) => {
     const [formData, setFormData] = useState({
         full_name: '',
         user_name: '',
-        // account_balance: '',
-        // cash_amount: '',
         email: '',
         password: '',
         phoneNumber: ''
     });
-    const [responseMessage, setResponseMessage] = useState('');
 
+    const [showPassword, setShowPassword] = useState(false);
+    const [responseMessage, setResponseMessage] = useState('');
 
     const handleChange = (e) => {
         setFormData({
@@ -21,7 +24,17 @@ const UserCreationForm = () => {
         });
     };
 
-   
+    const handlePhoneChanges = (value) => {
+        setFormData({
+            ...formData,
+            phoneNumber: value,
+        });
+    };
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword); 
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -32,7 +45,7 @@ const UserCreationForm = () => {
                 },
                 body: JSON.stringify(formData)
             });
-
+   
             const data = await response.json();
             if (response.ok) {
                 setResponseMessage(`User created successfully: ${data.full_name}`);
@@ -45,8 +58,7 @@ const UserCreationForm = () => {
     };
 
     return (
-        <div>
-            <h2>Create User</h2>
+        <div id="form1">
             <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="full_name">Full Name:</label>
@@ -70,28 +82,6 @@ const UserCreationForm = () => {
                         required
                     />
                 </div>
-                {/* <div>
-                    <label htmlFor="account_balance">Account Balance:</label>
-                    <input
-                        type="number"
-                        id="account_balance"
-                        name="account_balance"
-                        value={formData.account_balance}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <label htmlFor="cash_amount">Cash Amount:</label>
-                    <input
-                        type="number"
-                        id="cash_amount"
-                        name="cash_amount"
-                        value={formData.cash_amount}
-                        onChange={handleChange}
-                        required
-                    />
-                </div> */}
                 <div>
                     <label htmlFor="email">Email:</label>
                     <input
@@ -103,32 +93,38 @@ const UserCreationForm = () => {
                         required
                     />
                 </div>
-                <div>
+                
+                {/* Password input and toggle icon inside a container */}
+                <div className="password-container">
                     <label htmlFor="password">Password:</label>
                     <input
-                        type="password"
+                        type={showPassword ? "text" : "password"}
                         id="password"
                         name="password"
                         value={formData.password}
                         onChange={handleChange}
                         required
                     />
-                </div>
-                <div>
-                    <label htmlFor="phoneNumber">Phone Number:</label>
-                    <input
-                        type="tel"
-                        id="phoneNumber"
-                        name="phoneNumber"
-                        value={formData.phoneNumber}
-                        onChange={handleChange}
-                        required
+                    <FontAwesomeIcon
+                        icon={showPassword ? faEyeSlash : faEye}
+                        onClick={togglePasswordVisibility}
+                        className="eye-icon"
                     />
                 </div>
-                <button type="submit">Create User</button>
+
+                <div>
+                    <label htmlFor="phoneNumber">Phone Number:</label>
+                    <PhoneInput
+                        id="phoneNumber"
+                        country={'us'}
+                        value={formData.phoneNumber}
+                        onChange={handlePhoneChanges}
+                        inputStyle={{ width: '100%', padding: '10px', marginBottom: '10px' }}
+                    />
+                </div>
+                <button id="submit" type="submit">Register</button>
             </form>
 
-            {/* Display response message */}
             {responseMessage && <p>{responseMessage}</p>}
         </div>
     );
